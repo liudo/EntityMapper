@@ -9,61 +9,87 @@ using System.Threading.Tasks;
 
 namespace SimpleMapper
 {
-    public class Mapper : IMapper, IRuntimeMapper
+    public class Mapper : IMapper
     {
-        //public Mapper(IConfigurationProvider configurationProvider);
+        #region Static Fields
         static MapperConfiguration Configuration = MapperConfiguration.Instance;
-        
-        //static HashSet<IMapInfo> _maps = new HashSet<IMapInfo>();
-        static Dictionary<long, Dictionary<long, IMapInfo>> _mapsD = new Dictionary<long, Dictionary<long, IMapInfo>>();
+        #endregion
 
-        public static TDestination Map<TSource, TDestination>(TSource source) where TDestination : class, new()
+        #region Singleton
+        static Mapper _instance = null;
+        private static readonly object _lock = new object();
+        //public Mapper(IConfigurationProvider configurationProvider);
+        private Mapper()
         {
-            IMapableInternal instance = Configuration.GetMap<TSource, TDestination>();
+        }
+
+        public static Mapper Current
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (_lock)
+                    {
+                        if (_instance == null)
+                            _instance = new Mapper();
+                    }
+                }
+                return _instance;
+            }
+        }
+        #endregion
+
+        #region Object Map
+        public TDestination Map<TSource, TDestination>(TSource source, TDestination destination) where TDestination : class
+        {
+            IMappable instance = Configuration.GetMap<TSource, TDestination>();
+            return instance.ConvertTo(source, destination) as TDestination;
+        }
+        public TDestination Map<TSource, TDestination>(TSource source) where TDestination : class, new()
+        {
+            IMappable instance = Configuration.GetMap<TSource, TDestination>();
             instance.Source = source;
             return instance.ConvertTo() as TDestination;
         }
 
-        public static TDestination MapDeep<TSource, TDestination>(TSource source) where TDestination : class, new()
+        public TDestination MapDeep<TSource, TDestination>(TSource source) where TDestination : class, new()
         {
-            IMapableInternal instance = Configuration.GetMap<TSource, TDestination>();
+            IMappable instance = Configuration.GetMap<TSource, TDestination>();
             instance.Source = source;
             return instance.ConvertToDeepCopy() as TDestination;
         }
-        public static TDestination MapListDeep<TSource, TDestination>(TSource source)
+        #endregion
+
+        #region Collection Map
+        public TDestination MapListDeep<TSource, TDestination>(TSource source)
             where TDestination : class, new()
         {
-            IMapableInternal instance = Configuration.GetMapList<TSource, TDestination>();
+            IMappable instance = Configuration.GetMapList<TSource, TDestination>();
             return instance.ConvertToListDeepCopy(source) as TDestination;
         }
-        public static TDestination MapListDeepParallel<TSource, TDestination>(TSource source)
+        public TDestination MapListDeepParallel<TSource, TDestination>(TSource source)
             where TDestination : class, new()
         {
-            IMapableInternal instance = Configuration.GetMapList<TSource, TDestination>();
+            IMappable instance = Configuration.GetMapList<TSource, TDestination>();
             return instance.ConvertToListMiltiTreadedDeepCopy(source) as TDestination;
         }
 
-        public static TDestination MapList<TSource, TDestination>(TSource source) 
+        public TDestination MapList<TSource, TDestination>(TSource source) 
             where TDestination : class, new()
         {
-            IMapableInternal instance = Configuration.GetMapList<TSource, TDestination>();
+            IMappable instance = Configuration.GetMapList<TSource, TDestination>();
             return instance.ConvertToList(source) as TDestination;
         }
 
-        public static TDestination MapListParallel<TSource, TDestination>(TSource source)
+        public TDestination MapListParallel<TSource, TDestination>(TSource source)
             where TDestination : class, new()
         {
-            IMapableInternal instance = Configuration.GetMapList<TSource, TDestination>();
+            IMappable instance = Configuration.GetMapList<TSource, TDestination>();
             return instance.ConvertToListMultiThreaded(source) as TDestination;
         }
 
-
-        public static TDestination Map<TSource, TDestination>(TSource source, TDestination destination) where TDestination : class
-        {
-            IMapableInternal instance = Configuration.GetMap<TSource, TDestination>();
-            return instance.ConvertTo(source, destination) as TDestination;
-        }
-        
+        #endregion
         public static void Configure(Action<MapperConfiguration> action)
         {
             action.Invoke(Configuration);    

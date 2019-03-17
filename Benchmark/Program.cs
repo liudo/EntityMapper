@@ -21,21 +21,21 @@ namespace Benchmark
                     { "ManualMapper_ObjectDeepMapper_ShallowCopy", new IMaperTest[] { new ManualMapper_ObjectDeepMapper_ShallowCopy()} },
                     { "ManualMapper_ObjectDeepMapper_DeepCopy", new IMaperTest[] { new ManualMapper_ObjectDeepMapper_DeepCopy()} },
 
-                    //{ "AutoMapper_ListOfObjectsMapper", new IMaperTest[] { new AutoMapper_ListOfObjectsMapper()} },
-                    //{ "SimpleMapper_ListOfObjectsMapper", new IMaperTest[] { new SimpleMapper_ListOfObjectsMapper()} },
-                    //{ "SimpleMapper_ListOfObjectsMapper_Parallel", new IMaperTest[] { new SimpleMapper_ListOfObjectsMapper() { UseParallel = true } } },
-                    //{ "ManualMapper_ListOfObjectsMapper", new IMaperTest[] { new ManualMapper_ListOfObjectsMapper()} },
-                    //{ "ManualMapper_ListOfObjectsMapper_Parallel", new IMaperTest[] { new ManualMapper_ListOfObjectsMapper() { UseParallel = true } } },
+                    { "AutoMapper_ListOfObjectsMapper", new IMaperTest[] { new AutoMapper_ListOfObjectsMapper()} },
+                    { "SimpleMapper_ListOfObjectsMapper", new IMaperTest[] { new SimpleMapper_ListOfObjectsMapper()} },
+                    { "SimpleMapper_ListOfObjectsMapper_Parallel", new IMaperTest[] { new SimpleMapper_ListOfObjectsMapper() { UseParallel = true } } },
+                    { "ManualMapper_ListOfObjectsMapper", new IMaperTest[] { new ManualMapper_ListOfObjectsMapper()} },
+                    { "ManualMapper_ListOfObjectsMapper_Parallel", new IMaperTest[] { new ManualMapper_ListOfObjectsMapper() { UseParallel = true } } },
 
-                    //{ "AutoMapper_ListOfDeepObjectsMapper", new IMaperTest[] { new AutoMapper_ListOfDeepObjectsMapper()} },
-                    //{ "SimpleMapper_ListOfDeepObjectsMapper_ShallowCopy", new IMaperTest[] { new SimpleMapper_ListOfDeepObjectsMapper_ShallowCopy()} },
-                    //{ "SimpleMapper_ListOfDeepObjectsMapper_ShallowCopy_Parallel", new IMaperTest[] { new SimpleMapper_ListOfDeepObjectsMapper_ShallowCopy() { UseParallel = true } } },
-                    //{ "SimpleMapper_ListOfDeepObjectsMapper_DeepCopy", new IMaperTest[] { new SimpleMapper_ListOfDeepObjectsMapper_DeepCopy()} },
-                    //{ "SimpleMapper_ListOfDeepObjectsMapper_DeepCopy_Parallel", new IMaperTest[] { new SimpleMapper_ListOfDeepObjectsMapper_DeepCopy() { UseParallel = true } } },
+                    { "AutoMapper_ListOfDeepObjectsMapper", new IMaperTest[] { new AutoMapper_ListOfDeepObjectsMapper()} },
+                    { "SimpleMapper_ListOfDeepObjectsMapper_ShallowCopy", new IMaperTest[] { new SimpleMapper_ListOfDeepObjectsMapper_ShallowCopy()} },
+                    { "SimpleMapper_ListOfDeepObjectsMapper_ShallowCopy_Parallel", new IMaperTest[] { new SimpleMapper_ListOfDeepObjectsMapper_ShallowCopy() { UseParallel = true } } },
+                    { "SimpleMapper_ListOfDeepObjectsMapper_DeepCopy", new IMaperTest[] { new SimpleMapper_ListOfDeepObjectsMapper_DeepCopy()} },
+                    { "SimpleMapper_ListOfDeepObjectsMapper_DeepCopy_Parallel", new IMaperTest[] { new SimpleMapper_ListOfDeepObjectsMapper_DeepCopy() { UseParallel = true } } },
                 };
 
         static Dictionary<string, double> mapperTestTimes = new Dictionary<string, double>();
-
+       
         static void Main(string[] args)
         {
             //TestAutomapper();
@@ -150,7 +150,7 @@ namespace Benchmark
                 var destProp = destProps.Where(p => p.Name == srcProp.Name && p.GetMethod.IsPublic && p.SetMethod.IsPublic).FirstOrDefault();
                 if (destProp != null)
                 {
-                    //this need to be configurable -> if true -> objDest.ObjProp = objSource.ObjProp; if false -> objDest.ObjProp = SimpleMapper.Mapper.Map<objSource.ObjPropType, objDest.ObjPropType>(source);
+                    //this need to be configurable -> if true -> objDest.ObjProp = objSource.ObjProp; if false -> objDest.ObjProp = SimpleMapper.Mapper.Current.Map<objSource.ObjPropType, objDest.ObjPropType>(source);
                     if ((destProp.PropertyType.IsPrimitive == true || destProp.PropertyType.Name == "String"))
                     {
                         result.AppendLine($"{destinationName}.{destProp.Name} = {sourceName}.{srcProp.Name};");

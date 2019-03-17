@@ -109,7 +109,7 @@ namespace SimpleMapper
                 var destProp = destProps.Where(p => p.Name == srcProp.Name && p.GetMethod.IsPublic && p.SetMethod.IsPublic).FirstOrDefault();
                 if (destProp != null)
                 {
-                    //this need to be configurable -> if true -> objDest.ObjProp = objSource.ObjProp; if false -> objDest.ObjProp = SimpleMapper.Mapper.Map<objSource.ObjPropType, objDest.ObjPropType>(source);
+                    //this need to be configurable -> if true -> objDest.ObjProp = objSource.ObjProp; if false -> objDest.ObjProp = SimpleMapper.Mapper.Current.Map<objSource.ObjPropType, objDest.ObjPropType>(source);
                     if (deepCopy == false || (destProp.PropertyType.IsPrimitive == true || destProp.PropertyType.Name == "String"))
                     {
                         temp.AppendLine($"destination.{destProp.Name} = {sourceName}.{srcProp.Name};");
@@ -119,7 +119,7 @@ namespace SimpleMapper
                         //ReplaceTemplateMappingProperties(source, srcProp.PropertyType, destProp.PropertyType,
                         //    $"{destinationName}.{destProp.Name}", $"{sourceName}.{srcProp.Name}");
 
-                        temp.AppendLine($"destination.{destProp.Name} = SimpleMapper.Mapper.Map<{srcProp.PropertyType.Name}, {destProp.PropertyType.Name}>({sourceName}.{srcProp.Name});");
+                        temp.AppendLine($"destination.{destProp.Name} = SimpleMapper.Mapper.Current.Map<{srcProp.PropertyType.Name}, {destProp.PropertyType.Name}>({sourceName}.{srcProp.Name});");
                     }
                 }
             }
@@ -146,7 +146,7 @@ namespace SimpleMapper
                 var destProp = destProps.Where(p => p.Name == srcProp.Name && p.GetMethod.IsPublic && p.SetMethod.IsPublic).FirstOrDefault();
                 if (destProp != null)
                 {
-                    //this need to be configurable -> if true -> objDest.ObjProp = objSource.ObjProp; if false -> objDest.ObjProp = SimpleMapper.Mapper.Map<objSource.ObjPropType, objDest.ObjPropType>(source);
+                    //this need to be configurable -> if true -> objDest.ObjProp = objSource.ObjProp; if false -> objDest.ObjProp = SimpleMapper.Mapper.Current.Map<objSource.ObjPropType, objDest.ObjPropType>(source);
                     if ((destProp.PropertyType.IsPrimitive == true || destProp.PropertyType.Name == "String"))
                     {
                         result.AppendLine($"{destinationName}.{destProp.Name} = {sourceName}.{srcProp.Name};");
@@ -176,7 +176,7 @@ namespace SimpleMapper
         //            }
         //            else
         //            {
-        //                temp.AppendLine($"destination.{destProp.Name} = SimpleMapper.Mapper.Map<{srcProp.PropertyType.Name}, {destProp.PropertyType.Name}>({sourceName}.{srcProp.Name});");
+        //                temp.AppendLine($"destination.{destProp.Name} = SimpleMapper.Mapper.Current.Map<{srcProp.PropertyType.Name}, {destProp.PropertyType.Name}>({sourceName}.{srcProp.Name});");
         //            }
         //        }
         //    }
@@ -286,7 +286,7 @@ namespace SimpleMapper
                         foreach (var map in maps)
                         {
                             var type = myAssembly.GetType($"SimpleMapper.Dynamic.Mappers.{map.SourceType.Name}_{map.DestinationType.Name}");
-                            IMapableInternal instance = Activator.CreateInstance(type) as IMapableInternal;
+                            IMappable instance = Activator.CreateInstance(type) as IMappable;
                             map.Instance = instance;
                             map.Mapper = map.SourceType;
                         }

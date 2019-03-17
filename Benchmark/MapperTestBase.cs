@@ -360,9 +360,7 @@ namespace Benchmark
             where TDest : _Base, new()
         {
             ConcurrentBag<TDest> result = new ConcurrentBag<TDest>();
-            ParallelOptions options = new ParallelOptions();
-            options.MaxDegreeOfParallelism = 10;
-            System.Threading.Tasks.Parallel.ForEach(source, options, item =>
+            System.Threading.Tasks.Parallel.ForEach(source, item =>
             {
                 result.Add(MapManual<TSource, TDest>(item));
             });

@@ -8,7 +8,7 @@ namespace SimpleMapper
         public Type DestinationType { get { return typeof(TDestination); } }
 
         public Type Mapper { get; set; }
-        public IMapableInternal Instance { get; set; }
+        public IMappable Instance { get; set; }
         public string SourceCodeTSource { get; set; }
         public string SourceCodeTDestination { get; set; }
 

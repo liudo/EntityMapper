@@ -4,23 +4,26 @@ using System.Text;
 
 namespace SimpleMapper
 {
-    public interface IMapable<TDestination>
+    public interface IMappable
     {
-        TDestination ConvertTo();
-    }
+        #region Properties
+        object Source { get; set; }
+        object Destination { get; set; }
+        #endregion
 
-    public interface IMapableInternal {
+        #region Object Map
         object ConvertTo();
         object ConvertToDeepCopy();
         object ConvertTo(object source, object destination);
         object ConvertFromSourceToDest();
+        #endregion
 
+        #region Collection Map
         object ConvertToList(object sourceList);
         object ConvertToListMultiThreaded(object sourceList);
         object ConvertToListDeepCopy(object sourceList);
         object ConvertToListMiltiTreadedDeepCopy(object sourceList);
+        #endregion
 
-        object Source { get; set; }
-        object Destination { get; set; }
     }
 }

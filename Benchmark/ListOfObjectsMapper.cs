@@ -249,7 +249,7 @@ namespace Benchmark
                 Stopwatch stopwatch = new Stopwatch();
                 var source = this.GetListOfT<TSource>(ii);
                 stopwatch.Start();
-                var dest = SimpleMapper.Mapper.MapList<TSource, TDestionation>(source);
+                var dest = SimpleMapper.Mapper.Current.MapList<TSource, TDestionation>(source);
                 stopwatch.Stop();
                 autoMapperElapsedTicks.Add(stopwatch.Elapsed.Ticks);
             }
@@ -268,7 +268,7 @@ namespace Benchmark
                 Stopwatch stopwatch = new Stopwatch();
                 var source = this.GetListOfT<TSource>(ii);
                 stopwatch.Start();
-                var dest = SimpleMapper.Mapper.MapListParallel<TSource, TDestionation>(source);
+                var dest = SimpleMapper.Mapper.Current.MapListParallel<TSource, TDestionation>(source);
                 stopwatch.Stop();
                 autoMapperElapsedTicks.Add(stopwatch.Elapsed.Ticks);
             }
@@ -343,7 +343,7 @@ namespace Benchmark
                 Stopwatch stopwatch = new Stopwatch();
                 var source = this.GetListOfT<TSource>(ii);
                 stopwatch.Start();
-                var dest = SimpleMapper.Mapper.MapListDeep<TSource, TDestionation>(source);
+                var dest = SimpleMapper.Mapper.Current.MapListDeep<TSource, TDestionation>(source);
                 stopwatch.Stop();
                 autoMapperElapsedTicks.Add(stopwatch.Elapsed.Ticks);
             }
@@ -362,7 +362,7 @@ namespace Benchmark
                 Stopwatch stopwatch = new Stopwatch();
                 var source = this.GetListOfT<TSource>(ii);
                 stopwatch.Start();
-                var dest = SimpleMapper.Mapper.MapListDeepParallel<TSource, TDestionation>(source);
+                var dest = SimpleMapper.Mapper.Current.MapListDeepParallel<TSource, TDestionation>(source);
                 stopwatch.Stop();
                 autoMapperElapsedTicks.Add(stopwatch.Elapsed.Ticks);
             }
@@ -435,7 +435,7 @@ namespace Benchmark
                 Stopwatch stopwatch = new Stopwatch();
                 var source = this.GetListOfT<TSource>(ii);
                 stopwatch.Start();
-                var dest = SimpleMapper.Mapper.MapList<TSource, TDestionation>(source);
+                var dest = SimpleMapper.Mapper.Current.MapList<TSource, TDestionation>(source);
                 stopwatch.Stop();
                 autoMapperElapsedTicks.Add(stopwatch.Elapsed.Ticks);
             }
@@ -454,7 +454,7 @@ namespace Benchmark
                 Stopwatch stopwatch = new Stopwatch();
                 var source = this.GetListOfT<TSource>(ii);
                 stopwatch.Start();
-                var dest = SimpleMapper.Mapper.MapListParallel<TSource, TDestionation>(source);
+                var dest = SimpleMapper.Mapper.Current.MapListParallel<TSource, TDestionation>(source);
                 stopwatch.Stop();
                 autoMapperElapsedTicks.Add(stopwatch.Elapsed.Ticks);
             }

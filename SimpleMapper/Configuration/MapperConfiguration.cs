@@ -29,12 +29,12 @@ namespace SimpleMapper.Configuration
             _MappingsToCompile.Clear();
         }
 
-        internal IMapableInternal GetMap<TSource, TDestination>()
+        internal IMappable GetMap<TSource, TDestination>()
         {
             return _Mappings[GetMapKey<TSource>()][GetMapKey<TDestination>()].Instance;
         }
 
-        internal IMapableInternal GetMapList<TSource, TDestination>()
+        internal IMappable GetMapList<TSource, TDestination>()
         {
             return _Mappings[GetMapKeyList<TSource>()][GetMapKeyList<TDestination>()].Instance;
         }

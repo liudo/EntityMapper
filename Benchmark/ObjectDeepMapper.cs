@@ -65,7 +65,7 @@ namespace Benchmark
                 Stopwatch stopwatch = new Stopwatch();
                 var source = this.GetTDeep<TSource>(ii);
                 stopwatch.Start();
-                var dest = SimpleMapper.Mapper.Map<TSource, TDestionation>(source);
+                var dest = SimpleMapper.Mapper.Current.Map<TSource, TDestionation>(source);
                 stopwatch.Stop();
                 autoMapperElapsedTicks.Add(stopwatch.ElapsedTicks);
             }
@@ -130,7 +130,7 @@ namespace Benchmark
                 Stopwatch stopwatch = new Stopwatch();
                 var source = this.GetTDeep<TSource>(ii);
                 stopwatch.Start();
-                var dest = SimpleMapper.Mapper.MapDeep<TSource, TDestionation>(source);
+                var dest = SimpleMapper.Mapper.Current.MapDeep<TSource, TDestionation>(source);
                 stopwatch.Stop();
                 autoMapperElapsedTicks.Add(stopwatch.ElapsedTicks);
             }
