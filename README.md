@@ -10,7 +10,6 @@ SimpleMapper.Mapper.Configure(cfg =>
     cfg.CreateMap<B, B>(reversal: false);
     cfg.CreateMap<A, ADto>(reversal: true);
     cfg.CreateMap<B, BDto>(reversal: true);
-    cfg.Compile("SimpleMapper_ObjectMapper.dll");
 });
 ```
 
