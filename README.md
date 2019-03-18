@@ -1,5 +1,5 @@
 # SimpleMapper - Work In Progress
-Object to object mapper library. Provides shallow and deep copy mapping of objects and collections. Configurable mapping.
+.Net Object to object mapper library. Provides shallow and deep copy mapping of objects and collections.
 
 ### How to Configure
 ```c#
