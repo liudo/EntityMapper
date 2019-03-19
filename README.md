@@ -3,7 +3,7 @@
 
 ### How to Configure
 ```c#
-SimpleMapper.Mapper.Configure(cfg =>
+EntityMapper.Mapper.Configure(cfg =>
 {
     cfg.ClearMappings();
     cfg.CreateMap<A, A>(reversal: false);
@@ -16,11 +16,11 @@ SimpleMapper.Mapper.Configure(cfg =>
 ### How to Map Objects
 ```c#
 A source = new A();
-B result = SimpleMapper.Mapper.Current.Map<A, B>(source);
+B result = EntityMapper.Mapper.Current.Map<A, B>(source);
 ```
 
 ### How to Map Lists
 ```c#
 List<A> source = new List<A>(){new A(), new A()};
-List<B> result = SimpleMapper.Mapper.Current.MapList<List<A>, List<B>(source);
+List<B> result = EntityMapper.Mapper.Current.MapList<List<A>, List<B>(source);
 ```
