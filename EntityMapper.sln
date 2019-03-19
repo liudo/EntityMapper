@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28407.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityMapper", "SimpleMapper\EntityMapper.csproj", "{5231B11D-1EB1-46D6-82E0-38D16F6F782A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityMapper", "EntityMapper\EntityMapper.csproj", "{5231B11D-1EB1-46D6-82E0-38D16F6F782A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmark", "Benchmark\Benchmark.csproj", "{9003A443-E465-4737-9B32-3D7FAFF194FF}"
 EndProject
