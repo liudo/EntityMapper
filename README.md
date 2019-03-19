@@ -1,4 +1,4 @@
-# SimpleMapper - Work In Progress
+# EntityMapper - Work In Progress
 .Net Object to object mapper library. Provides shallow and deep copy mapping of objects and collections.
 
 ### How to Configure
