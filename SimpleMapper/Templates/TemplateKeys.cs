@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleMapper.Templates
+namespace EntityMapper.Templates
 {
     public class TemplateKeys
     {

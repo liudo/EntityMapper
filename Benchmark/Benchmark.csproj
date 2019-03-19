@@ -12,10 +12,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Benchamark.Common\Benchamark.Common.csproj" />
-    <ProjectReference Include="..\SimpleMapper\SimpleMapper.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SimpleMapper\EntityMapper.csproj" />
   </ItemGroup>
 
 </Project>

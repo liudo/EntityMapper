@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Benchmark
 {
-    public class SimpleMapper_ObjectDeepMapper_ShallowCopy : MapperTestBase, IMaperTest
+    public class EntityMapper_ObjectDeepMapper_ShallowCopy : MapperTestBase, IMaperTest
     {
         public bool UseParallel { get; set; }
         public int RandomDataSampleSize { get; set; }
@@ -17,7 +17,7 @@ namespace Benchmark
         {
             RandomDataSampleSize = randomDataSampleSize;
 
-            SimpleMapper.Mapper.Configure(cfg =>
+            EntityMapper.Mapper.Configure(cfg =>
             {
                 cfg.ClearMappings();
                 cfg.CreateMap<B, B>(reversal: false);
@@ -26,15 +26,15 @@ namespace Benchmark
                 cfg.CreateMap<E, E>(reversal: false);
                 cfg.CreateMap<F, F>(reversal: false);
                 cfg.CreateMap<DeepBCDEF, DeepCDE>(reversal: true);
-                cfg.Compile("SimpleMapper_ObjectDeepMapper_ShallowCopy.dll");
+                cfg.Compile("EntityMapper_ObjectDeepMapper_ShallowCopy.dll");
             });
-            //SimpleMapper.Mapper.CreateMap<B, B>(reversal: false);
-            //SimpleMapper.Mapper.CreateMap<C, C>(reversal: false);
-            //SimpleMapper.Mapper.CreateMap<D, D>(reversal: false);
-            //SimpleMapper.Mapper.CreateMap<E, E>(reversal: false);
-            //SimpleMapper.Mapper.CreateMap<F, F>(reversal: false);
-            //SimpleMapper.Mapper.CreateMap<DeepBCDEF, DeepCDE>(reversal: true);
-            //SimpleMapper.Mapper.Compile("SimpleMapper_ObjectToObjectDeepMapper.dll");
+            //EntityMapper.Mapper.CreateMap<B, B>(reversal: false);
+            //EntityMapper.Mapper.CreateMap<C, C>(reversal: false);
+            //EntityMapper.Mapper.CreateMap<D, D>(reversal: false);
+            //EntityMapper.Mapper.CreateMap<E, E>(reversal: false);
+            //EntityMapper.Mapper.CreateMap<F, F>(reversal: false);
+            //EntityMapper.Mapper.CreateMap<DeepBCDEF, DeepCDE>(reversal: true);
+            //EntityMapper.Mapper.Compile("EntityMapper_ObjectToObjectDeepMapper.dll");
 
             AssignRandomData(randomDataSampleSize);
         }
@@ -65,7 +65,7 @@ namespace Benchmark
                 Stopwatch stopwatch = new Stopwatch();
                 var source = this.GetTDeep<TSource>(ii);
                 stopwatch.Start();
-                var dest = SimpleMapper.Mapper.Current.Map<TSource, TDestionation>(source);
+                var dest = EntityMapper.Mapper.Current.Map<TSource, TDestionation>(source);
                 stopwatch.Stop();
                 autoMapperElapsedTicks.Add(stopwatch.ElapsedTicks);
             }
@@ -73,7 +73,7 @@ namespace Benchmark
         }
     }
 
-    public class SimpleMapper_ObjectDeepMapper_DeepCopy : MapperTestBase, IMaperTest
+    public class EntityMapper_ObjectDeepMapper_DeepCopy : MapperTestBase, IMaperTest
     {
         public bool UseParallel { get; set; }
         public int RandomDataSampleSize { get; set; }
@@ -82,7 +82,7 @@ namespace Benchmark
         {
             RandomDataSampleSize = randomDataSampleSize;
 
-            SimpleMapper.Mapper.Configure(cfg =>
+            EntityMapper.Mapper.Configure(cfg =>
             {
                 cfg.ClearMappings();
                 cfg.CreateMap<B, B>(reversal: false);
@@ -91,15 +91,15 @@ namespace Benchmark
                 cfg.CreateMap<E, E>(reversal: false);
                 cfg.CreateMap<F, F>(reversal: false);
                 cfg.CreateMap<DeepBCDEF, DeepCDE>(reversal: true);
-                cfg.Compile("SimpleMapper_ObjectDeepMapper_DeepCopy.dll");
+                cfg.Compile("EntityMapper_ObjectDeepMapper_DeepCopy.dll");
             });
-            //SimpleMapper.Mapper.CreateMap<B, B>(reversal: false);
-            //SimpleMapper.Mapper.CreateMap<C, C>(reversal: false);
-            //SimpleMapper.Mapper.CreateMap<D, D>(reversal: false);
-            //SimpleMapper.Mapper.CreateMap<E, E>(reversal: false);
-            //SimpleMapper.Mapper.CreateMap<F, F>(reversal: false);
-            //SimpleMapper.Mapper.CreateMap<DeepBCDEF, DeepCDE>(reversal: true);
-            //SimpleMapper.Mapper.Compile("SimpleMapper_ObjectToObjectDeepMapper.dll");
+            //EntityMapper.Mapper.CreateMap<B, B>(reversal: false);
+            //EntityMapper.Mapper.CreateMap<C, C>(reversal: false);
+            //EntityMapper.Mapper.CreateMap<D, D>(reversal: false);
+            //EntityMapper.Mapper.CreateMap<E, E>(reversal: false);
+            //EntityMapper.Mapper.CreateMap<F, F>(reversal: false);
+            //EntityMapper.Mapper.CreateMap<DeepBCDEF, DeepCDE>(reversal: true);
+            //EntityMapper.Mapper.Compile("EntityMapper_ObjectToObjectDeepMapper.dll");
 
             AssignRandomData(randomDataSampleSize);
         }
@@ -130,7 +130,7 @@ namespace Benchmark
                 Stopwatch stopwatch = new Stopwatch();
                 var source = this.GetTDeep<TSource>(ii);
                 stopwatch.Start();
-                var dest = SimpleMapper.Mapper.Current.MapDeep<TSource, TDestionation>(source);
+                var dest = EntityMapper.Mapper.Current.MapDeep<TSource, TDestionation>(source);
                 stopwatch.Stop();
                 autoMapperElapsedTicks.Add(stopwatch.ElapsedTicks);
             }

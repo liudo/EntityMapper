@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SimpleMapper
+namespace EntityMapper
 {
     internal class MapInfo<TSource, TDestination> : IMapInfo
     {

@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
-using SimpleMapper;
+using EntityMapper;
 using Benchmark.Common;
 
 
-namespace SimpleMapper.Dynamic.Mappers
+namespace EntityMapper.Dynamic.Mappers
 {
     public class B_B : Benchmark.Common.B, IMappable
     {
@@ -75,7 +75,7 @@ namespace SimpleMapper.Dynamic.Mappers
             List<B> destination = new List<B>();
             foreach (var source in sources)
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.B, B>(source) as B);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.B, B>(source) as B);
             }
 
             return destination;
@@ -86,7 +86,7 @@ namespace SimpleMapper.Dynamic.Mappers
             ConcurrentBag<B> destination = new ConcurrentBag<B>();
             System.Threading.Tasks.Parallel.ForEach(sources, (source) =>
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.B, B>(source) as B);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.B, B>(source) as B);
             });
 
             return destination.ToList<B>();
@@ -173,7 +173,7 @@ namespace SimpleMapper.Dynamic.Mappers
             List<C> destination = new List<C>();
             foreach (var source in sources)
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.C, C>(source) as C);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.C, C>(source) as C);
             }
 
             return destination;
@@ -184,7 +184,7 @@ namespace SimpleMapper.Dynamic.Mappers
             ConcurrentBag<C> destination = new ConcurrentBag<C>();
             System.Threading.Tasks.Parallel.ForEach(sources, (source) =>
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.C, C>(source) as C);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.C, C>(source) as C);
             });
 
             return destination.ToList<C>();
@@ -271,7 +271,7 @@ namespace SimpleMapper.Dynamic.Mappers
             List<D> destination = new List<D>();
             foreach (var source in sources)
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.D, D>(source) as D);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.D, D>(source) as D);
             }
 
             return destination;
@@ -282,7 +282,7 @@ namespace SimpleMapper.Dynamic.Mappers
             ConcurrentBag<D> destination = new ConcurrentBag<D>();
             System.Threading.Tasks.Parallel.ForEach(sources, (source) =>
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.D, D>(source) as D);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.D, D>(source) as D);
             });
 
             return destination.ToList<D>();
@@ -369,7 +369,7 @@ namespace SimpleMapper.Dynamic.Mappers
             List<E> destination = new List<E>();
             foreach (var source in sources)
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.E, E>(source) as E);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.E, E>(source) as E);
             }
 
             return destination;
@@ -380,7 +380,7 @@ namespace SimpleMapper.Dynamic.Mappers
             ConcurrentBag<E> destination = new ConcurrentBag<E>();
             System.Threading.Tasks.Parallel.ForEach(sources, (source) =>
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.E, E>(source) as E);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.E, E>(source) as E);
             });
 
             return destination.ToList<E>();
@@ -467,7 +467,7 @@ namespace SimpleMapper.Dynamic.Mappers
             List<F> destination = new List<F>();
             foreach (var source in sources)
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.F, F>(source) as F);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.F, F>(source) as F);
             }
 
             return destination;
@@ -478,7 +478,7 @@ namespace SimpleMapper.Dynamic.Mappers
             ConcurrentBag<F> destination = new ConcurrentBag<F>();
             System.Threading.Tasks.Parallel.ForEach(sources, (source) =>
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.F, F>(source) as F);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.F, F>(source) as F);
             });
 
             return destination.ToList<F>();
@@ -565,7 +565,7 @@ namespace SimpleMapper.Dynamic.Mappers
             List<BDto> destination = new List<BDto>();
             foreach (var source in sources)
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.B, BDto>(source) as BDto);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.B, BDto>(source) as BDto);
             }
 
             return destination;
@@ -576,7 +576,7 @@ namespace SimpleMapper.Dynamic.Mappers
             ConcurrentBag<BDto> destination = new ConcurrentBag<BDto>();
             System.Threading.Tasks.Parallel.ForEach(sources, (source) =>
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.B, BDto>(source) as BDto);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.B, BDto>(source) as BDto);
             });
 
             return destination.ToList<BDto>();
@@ -663,7 +663,7 @@ namespace SimpleMapper.Dynamic.Mappers
             List<B> destination = new List<B>();
             foreach (var source in sources)
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.BDto, B>(source) as B);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.BDto, B>(source) as B);
             }
 
             return destination;
@@ -674,7 +674,7 @@ namespace SimpleMapper.Dynamic.Mappers
             ConcurrentBag<B> destination = new ConcurrentBag<B>();
             System.Threading.Tasks.Parallel.ForEach(sources, (source) =>
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.BDto, B>(source) as B);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.BDto, B>(source) as B);
             });
 
             return destination.ToList<B>();
@@ -761,7 +761,7 @@ namespace SimpleMapper.Dynamic.Mappers
             List<CDto> destination = new List<CDto>();
             foreach (var source in sources)
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.C, CDto>(source) as CDto);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.C, CDto>(source) as CDto);
             }
 
             return destination;
@@ -772,7 +772,7 @@ namespace SimpleMapper.Dynamic.Mappers
             ConcurrentBag<CDto> destination = new ConcurrentBag<CDto>();
             System.Threading.Tasks.Parallel.ForEach(sources, (source) =>
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.C, CDto>(source) as CDto);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.C, CDto>(source) as CDto);
             });
 
             return destination.ToList<CDto>();
@@ -859,7 +859,7 @@ namespace SimpleMapper.Dynamic.Mappers
             List<C> destination = new List<C>();
             foreach (var source in sources)
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.CDto, C>(source) as C);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.CDto, C>(source) as C);
             }
 
             return destination;
@@ -870,7 +870,7 @@ namespace SimpleMapper.Dynamic.Mappers
             ConcurrentBag<C> destination = new ConcurrentBag<C>();
             System.Threading.Tasks.Parallel.ForEach(sources, (source) =>
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.CDto, C>(source) as C);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.CDto, C>(source) as C);
             });
 
             return destination.ToList<C>();
@@ -957,7 +957,7 @@ namespace SimpleMapper.Dynamic.Mappers
             List<DDto> destination = new List<DDto>();
             foreach (var source in sources)
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.D, DDto>(source) as DDto);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.D, DDto>(source) as DDto);
             }
 
             return destination;
@@ -968,7 +968,7 @@ namespace SimpleMapper.Dynamic.Mappers
             ConcurrentBag<DDto> destination = new ConcurrentBag<DDto>();
             System.Threading.Tasks.Parallel.ForEach(sources, (source) =>
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.D, DDto>(source) as DDto);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.D, DDto>(source) as DDto);
             });
 
             return destination.ToList<DDto>();
@@ -1055,7 +1055,7 @@ namespace SimpleMapper.Dynamic.Mappers
             List<D> destination = new List<D>();
             foreach (var source in sources)
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.DDto, D>(source) as D);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.DDto, D>(source) as D);
             }
 
             return destination;
@@ -1066,7 +1066,7 @@ namespace SimpleMapper.Dynamic.Mappers
             ConcurrentBag<D> destination = new ConcurrentBag<D>();
             System.Threading.Tasks.Parallel.ForEach(sources, (source) =>
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.DDto, D>(source) as D);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.DDto, D>(source) as D);
             });
 
             return destination.ToList<D>();
@@ -1153,7 +1153,7 @@ namespace SimpleMapper.Dynamic.Mappers
             List<EDto> destination = new List<EDto>();
             foreach (var source in sources)
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.E, EDto>(source) as EDto);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.E, EDto>(source) as EDto);
             }
 
             return destination;
@@ -1164,7 +1164,7 @@ namespace SimpleMapper.Dynamic.Mappers
             ConcurrentBag<EDto> destination = new ConcurrentBag<EDto>();
             System.Threading.Tasks.Parallel.ForEach(sources, (source) =>
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.E, EDto>(source) as EDto);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.E, EDto>(source) as EDto);
             });
 
             return destination.ToList<EDto>();
@@ -1251,7 +1251,7 @@ namespace SimpleMapper.Dynamic.Mappers
             List<E> destination = new List<E>();
             foreach (var source in sources)
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.EDto, E>(source) as E);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.EDto, E>(source) as E);
             }
 
             return destination;
@@ -1262,7 +1262,7 @@ namespace SimpleMapper.Dynamic.Mappers
             ConcurrentBag<E> destination = new ConcurrentBag<E>();
             System.Threading.Tasks.Parallel.ForEach(sources, (source) =>
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.EDto, E>(source) as E);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.EDto, E>(source) as E);
             });
 
             return destination.ToList<E>();
@@ -1349,7 +1349,7 @@ namespace SimpleMapper.Dynamic.Mappers
             List<FDto> destination = new List<FDto>();
             foreach (var source in sources)
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.F, FDto>(source) as FDto);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.F, FDto>(source) as FDto);
             }
 
             return destination;
@@ -1360,7 +1360,7 @@ namespace SimpleMapper.Dynamic.Mappers
             ConcurrentBag<FDto> destination = new ConcurrentBag<FDto>();
             System.Threading.Tasks.Parallel.ForEach(sources, (source) =>
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.F, FDto>(source) as FDto);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.F, FDto>(source) as FDto);
             });
 
             return destination.ToList<FDto>();
@@ -1447,7 +1447,7 @@ namespace SimpleMapper.Dynamic.Mappers
             List<F> destination = new List<F>();
             foreach (var source in sources)
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.FDto, F>(source) as F);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.FDto, F>(source) as F);
             }
 
             return destination;
@@ -1458,7 +1458,7 @@ namespace SimpleMapper.Dynamic.Mappers
             ConcurrentBag<F> destination = new ConcurrentBag<F>();
             System.Threading.Tasks.Parallel.ForEach(sources, (source) =>
             {
-                destination.Add(SimpleMapper.Mapper.Current.MapDeep<Benchmark.Common.FDto, F>(source) as F);
+                destination.Add(EntityMapper.Mapper.Current.MapDeep<Benchmark.Common.FDto, F>(source) as F);
             });
 
             return destination.ToList<F>();

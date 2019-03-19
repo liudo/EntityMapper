@@ -155,7 +155,7 @@ namespace Benchmark
 
     
 
-    public class SimpleMapper_ListOfObjectsMapper : MapperTestBase, IMaperTest
+    public class EntityMapper_ListOfObjectsMapper : MapperTestBase, IMaperTest
     {
         public bool UseParallel { get; set; }
         public int RandomDataSampleSize { get; set; }
@@ -164,7 +164,7 @@ namespace Benchmark
         {
             RandomDataSampleSize = randomDataSampleSize;
 
-            SimpleMapper.Mapper.Configure(cfg =>
+            EntityMapper.Mapper.Configure(cfg =>
             {
                 cfg.ClearMappings();
                 cfg.CreateMap<B, B>(reversal: false);
@@ -177,7 +177,7 @@ namespace Benchmark
                 cfg.CreateMap<D, DDto>(reversal: true);
                 cfg.CreateMap<E, EDto>(reversal: true);
                 cfg.CreateMap<F, FDto>(reversal: true);
-                cfg.Compile("SimpleMapper_ListOfObjectsMapper.dll");
+                cfg.Compile("EntityMapper_ListOfObjectsMapper.dll");
             });
 
             AssignRandomDataLists(randomDataSampleSize, listMapperListSize);
@@ -249,7 +249,7 @@ namespace Benchmark
                 Stopwatch stopwatch = new Stopwatch();
                 var source = this.GetListOfT<TSource>(ii);
                 stopwatch.Start();
-                var dest = SimpleMapper.Mapper.Current.MapList<TSource, TDestionation>(source);
+                var dest = EntityMapper.Mapper.Current.MapList<TSource, TDestionation>(source);
                 stopwatch.Stop();
                 autoMapperElapsedTicks.Add(stopwatch.Elapsed.Ticks);
             }
@@ -268,7 +268,7 @@ namespace Benchmark
                 Stopwatch stopwatch = new Stopwatch();
                 var source = this.GetListOfT<TSource>(ii);
                 stopwatch.Start();
-                var dest = SimpleMapper.Mapper.Current.MapListParallel<TSource, TDestionation>(source);
+                var dest = EntityMapper.Mapper.Current.MapListParallel<TSource, TDestionation>(source);
                 stopwatch.Stop();
                 autoMapperElapsedTicks.Add(stopwatch.Elapsed.Ticks);
             }
@@ -278,7 +278,7 @@ namespace Benchmark
     }
 
 
-    public class SimpleMapper_ListOfDeepObjectsMapper_DeepCopy : MapperTestBase, IMaperTest
+    public class EntityMapper_ListOfDeepObjectsMapper_DeepCopy : MapperTestBase, IMaperTest
     {
         public bool UseParallel { get; set; }
         public int RandomDataSampleSize { get; set; }
@@ -287,7 +287,7 @@ namespace Benchmark
         {
             RandomDataSampleSize = randomDataSampleSize;
 
-            SimpleMapper.Mapper.Configure(cfg =>
+            EntityMapper.Mapper.Configure(cfg =>
             {
                 cfg.ClearMappings();
                 cfg.CreateMap<B, B>(reversal: false);
@@ -296,7 +296,7 @@ namespace Benchmark
                 cfg.CreateMap<E, E>(reversal: false);
                 cfg.CreateMap<F, F>(reversal: false);
                 cfg.CreateMap<DeepBCDEF, DeepCDE>(reversal: true);
-                cfg.Compile("SimpleMapper_ListOfDeepObjectsMapper_DeepCopy.dll");
+                cfg.Compile("EntityMapper_ListOfDeepObjectsMapper_DeepCopy.dll");
             });
 
             AssignRandomDataLists(randomDataSampleSize, listMapperListSize);
@@ -343,7 +343,7 @@ namespace Benchmark
                 Stopwatch stopwatch = new Stopwatch();
                 var source = this.GetListOfT<TSource>(ii);
                 stopwatch.Start();
-                var dest = SimpleMapper.Mapper.Current.MapListDeep<TSource, TDestionation>(source);
+                var dest = EntityMapper.Mapper.Current.MapListDeep<TSource, TDestionation>(source);
                 stopwatch.Stop();
                 autoMapperElapsedTicks.Add(stopwatch.Elapsed.Ticks);
             }
@@ -362,7 +362,7 @@ namespace Benchmark
                 Stopwatch stopwatch = new Stopwatch();
                 var source = this.GetListOfT<TSource>(ii);
                 stopwatch.Start();
-                var dest = SimpleMapper.Mapper.Current.MapListDeepParallel<TSource, TDestionation>(source);
+                var dest = EntityMapper.Mapper.Current.MapListDeepParallel<TSource, TDestionation>(source);
                 stopwatch.Stop();
                 autoMapperElapsedTicks.Add(stopwatch.Elapsed.Ticks);
             }
@@ -370,7 +370,7 @@ namespace Benchmark
         }
     }
 
-    public class SimpleMapper_ListOfDeepObjectsMapper_ShallowCopy : MapperTestBase, IMaperTest
+    public class EntityMapper_ListOfDeepObjectsMapper_ShallowCopy : MapperTestBase, IMaperTest
     {
         public bool UseParallel { get; set; }
         public int RandomDataSampleSize { get; set; }
@@ -379,7 +379,7 @@ namespace Benchmark
         {
             RandomDataSampleSize = randomDataSampleSize;
 
-            SimpleMapper.Mapper.Configure(cfg =>
+            EntityMapper.Mapper.Configure(cfg =>
             {
                 cfg.ClearMappings();
                 cfg.CreateMap<B, B>(reversal: false);
@@ -388,7 +388,7 @@ namespace Benchmark
                 cfg.CreateMap<E, E>(reversal: false);
                 cfg.CreateMap<F, F>(reversal: false);
                 cfg.CreateMap<DeepBCDEF, DeepCDE>(reversal: true);
-                cfg.Compile("SimpleMapper_ListOfDeepObjectsMapper_ShallowCopy.dll");
+                cfg.Compile("EntityMapper_ListOfDeepObjectsMapper_ShallowCopy.dll");
             });
 
             AssignRandomDataLists(randomDataSampleSize, listMapperListSize);
@@ -435,7 +435,7 @@ namespace Benchmark
                 Stopwatch stopwatch = new Stopwatch();
                 var source = this.GetListOfT<TSource>(ii);
                 stopwatch.Start();
-                var dest = SimpleMapper.Mapper.Current.MapList<TSource, TDestionation>(source);
+                var dest = EntityMapper.Mapper.Current.MapList<TSource, TDestionation>(source);
                 stopwatch.Stop();
                 autoMapperElapsedTicks.Add(stopwatch.Elapsed.Ticks);
             }
@@ -454,7 +454,7 @@ namespace Benchmark
                 Stopwatch stopwatch = new Stopwatch();
                 var source = this.GetListOfT<TSource>(ii);
                 stopwatch.Start();
-                var dest = SimpleMapper.Mapper.Current.MapListParallel<TSource, TDestionation>(source);
+                var dest = EntityMapper.Mapper.Current.MapListParallel<TSource, TDestionation>(source);
                 stopwatch.Stop();
                 autoMapperElapsedTicks.Add(stopwatch.Elapsed.Ticks);
             }

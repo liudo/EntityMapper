@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Emit;
-using SimpleMapper.Templates;
+using EntityMapper.Templates;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.Linq.Dynamic.Core;
 using System.Runtime.Loader;
 using System.Text;
 
-namespace SimpleMapper
+namespace EntityMapper
 {
     public class MapperCompiler
     {
@@ -109,7 +109,7 @@ namespace SimpleMapper
                 var destProp = destProps.Where(p => p.Name == srcProp.Name && p.GetMethod.IsPublic && p.SetMethod.IsPublic).FirstOrDefault();
                 if (destProp != null)
                 {
-                    //this need to be configurable -> if true -> objDest.ObjProp = objSource.ObjProp; if false -> objDest.ObjProp = SimpleMapper.Mapper.Current.Map<objSource.ObjPropType, objDest.ObjPropType>(source);
+                    //this need to be configurable -> if true -> objDest.ObjProp = objSource.ObjProp; if false -> objDest.ObjProp = EntityMapper.Mapper.Current.Map<objSource.ObjPropType, objDest.ObjPropType>(source);
                     if (deepCopy == false || (destProp.PropertyType.IsPrimitive == true || destProp.PropertyType.Name == "String"))
                     {
                         temp.AppendLine($"destination.{destProp.Name} = {sourceName}.{srcProp.Name};");
@@ -119,7 +119,7 @@ namespace SimpleMapper
                         //ReplaceTemplateMappingProperties(source, srcProp.PropertyType, destProp.PropertyType,
                         //    $"{destinationName}.{destProp.Name}", $"{sourceName}.{srcProp.Name}");
 
-                        temp.AppendLine($"destination.{destProp.Name} = SimpleMapper.Mapper.Current.Map<{srcProp.PropertyType.Name}, {destProp.PropertyType.Name}>({sourceName}.{srcProp.Name});");
+                        temp.AppendLine($"destination.{destProp.Name} = EntityMapper.Mapper.Current.Map<{srcProp.PropertyType.Name}, {destProp.PropertyType.Name}>({sourceName}.{srcProp.Name});");
                     }
                 }
             }
@@ -146,7 +146,7 @@ namespace SimpleMapper
                 var destProp = destProps.Where(p => p.Name == srcProp.Name && p.GetMethod.IsPublic && p.SetMethod.IsPublic).FirstOrDefault();
                 if (destProp != null)
                 {
-                    //this need to be configurable -> if true -> objDest.ObjProp = objSource.ObjProp; if false -> objDest.ObjProp = SimpleMapper.Mapper.Current.Map<objSource.ObjPropType, objDest.ObjPropType>(source);
+                    //this need to be configurable -> if true -> objDest.ObjProp = objSource.ObjProp; if false -> objDest.ObjProp = EntityMapper.Mapper.Current.Map<objSource.ObjPropType, objDest.ObjPropType>(source);
                     if ((destProp.PropertyType.IsPrimitive == true || destProp.PropertyType.Name == "String"))
                     {
                         result.AppendLine($"{destinationName}.{destProp.Name} = {sourceName}.{srcProp.Name};");
@@ -176,7 +176,7 @@ namespace SimpleMapper
         //            }
         //            else
         //            {
-        //                temp.AppendLine($"destination.{destProp.Name} = SimpleMapper.Mapper.Current.Map<{srcProp.PropertyType.Name}, {destProp.PropertyType.Name}>({sourceName}.{srcProp.Name});");
+        //                temp.AppendLine($"destination.{destProp.Name} = EntityMapper.Mapper.Current.Map<{srcProp.PropertyType.Name}, {destProp.PropertyType.Name}>({sourceName}.{srcProp.Name});");
         //            }
         //        }
         //    }
@@ -212,12 +212,12 @@ namespace SimpleMapper
                 return reader.ReadToEnd();
             }
         }
-        internal static void Compile(HashSet<IMapInfo> maps, string assemblyName = "SimpleMapper.Dynamic.Mappers.dll")
+        internal static void Compile(HashSet<IMapInfo> maps, string assemblyName = "EntityMapper.Dynamic.Mappers.dll")
         {
             LoadNeededAssemblies();
             string sourceCode = GenerateAllDynamicClasses(maps);
             SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);
-            //string assemblyName = Path.GetFileName("SimpleMapper.Dynamic.Mappers.dll");
+            //string assemblyName = Path.GetFileName("EntityMapper.Dynamic.Mappers.dll");
             BuildReferences();
 
             List<MetadataReference> references = new List<MetadataReference>();
@@ -230,7 +230,7 @@ namespace SimpleMapper
                 references.Add(MetadataReference.CreateFromFile(kvp.Value));
             }
             references.Add(MetadataReference.CreateFromFile(_assemblies[System.Reflection.Assembly.GetEntryAssembly().ManifestModule.Name]));
-            references.Add(MetadataReference.CreateFromFile(_assemblies[System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.Name]));//SimpleMapper.dll
+            references.Add(MetadataReference.CreateFromFile(_assemblies[System.Reflection.Assembly.GetExecutingAssembly().ManifestModule.Name]));//EntityMapper.dll
             references.Add(MetadataReference.CreateFromFile(@"C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.2.0\System.Threading.Tasks.Parallel.dll"));
             references.Add(MetadataReference.CreateFromFile(@"C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.2.0\netstandard.dll"));    
             //references.Add(MetadataReference.CreateFromFile(_assemblies["System.Treading.Task.dll"]));
@@ -285,7 +285,7 @@ namespace SimpleMapper
                     {
                         foreach (var map in maps)
                         {
-                            var type = myAssembly.GetType($"SimpleMapper.Dynamic.Mappers.{map.SourceType.Name}_{map.DestinationType.Name}");
+                            var type = myAssembly.GetType($"EntityMapper.Dynamic.Mappers.{map.SourceType.Name}_{map.DestinationType.Name}");
                             IMappable instance = Activator.CreateInstance(type) as IMappable;
                             map.Instance = instance;
                             map.Mapper = map.SourceType;

@@ -12,26 +12,26 @@ namespace Benchmark
         static Dictionary<string, IMaperTest[]> mappers = new Dictionary<string, IMaperTest[]>
                 {
                     { "AutoMapper_ObjectMapper", new IMaperTest[] { new AutoMapper_ObjectMapper()} },
-                    { "SimpleMapper_ObjectMapper", new IMaperTest[] { new SimpleMapper_ObjectMapper()} },
+                    { "EntityMapper_ObjectMapper", new IMaperTest[] { new EntityMapper_ObjectMapper()} },
                     { "ManualMapper_ObjectMapper", new IMaperTest[] { new ManualMapper_ObjectMapper()} },
                     { "AutoMapper_ObjectDeepMapper", new IMaperTest[] { new AutoMapper_ObjectDeepMapper()} },
 
-                    { "SimpleMapper_ObjectDeepMapper_ShallowCopy", new IMaperTest[] { new SimpleMapper_ObjectDeepMapper_ShallowCopy()} },
-                    { "SimpleMapper_ObjectDeepMapper_DeepCopy", new IMaperTest[] { new SimpleMapper_ObjectDeepMapper_DeepCopy()} },
+                    { "EntityMapper_ObjectDeepMapper_ShallowCopy", new IMaperTest[] { new EntityMapper_ObjectDeepMapper_ShallowCopy()} },
+                    { "EntityMapper_ObjectDeepMapper_DeepCopy", new IMaperTest[] { new EntityMapper_ObjectDeepMapper_DeepCopy()} },
                     { "ManualMapper_ObjectDeepMapper_ShallowCopy", new IMaperTest[] { new ManualMapper_ObjectDeepMapper_ShallowCopy()} },
                     { "ManualMapper_ObjectDeepMapper_DeepCopy", new IMaperTest[] { new ManualMapper_ObjectDeepMapper_DeepCopy()} },
 
                     { "AutoMapper_ListOfObjectsMapper", new IMaperTest[] { new AutoMapper_ListOfObjectsMapper()} },
-                    { "SimpleMapper_ListOfObjectsMapper", new IMaperTest[] { new SimpleMapper_ListOfObjectsMapper()} },
-                    { "SimpleMapper_ListOfObjectsMapper_Parallel", new IMaperTest[] { new SimpleMapper_ListOfObjectsMapper() { UseParallel = true } } },
+                    { "EntityMapper_ListOfObjectsMapper", new IMaperTest[] { new EntityMapper_ListOfObjectsMapper()} },
+                    { "EntityMapper_ListOfObjectsMapper_Parallel", new IMaperTest[] { new EntityMapper_ListOfObjectsMapper() { UseParallel = true } } },
                     { "ManualMapper_ListOfObjectsMapper", new IMaperTest[] { new ManualMapper_ListOfObjectsMapper()} },
                     { "ManualMapper_ListOfObjectsMapper_Parallel", new IMaperTest[] { new ManualMapper_ListOfObjectsMapper() { UseParallel = true } } },
 
                     { "AutoMapper_ListOfDeepObjectsMapper", new IMaperTest[] { new AutoMapper_ListOfDeepObjectsMapper()} },
-                    { "SimpleMapper_ListOfDeepObjectsMapper_ShallowCopy", new IMaperTest[] { new SimpleMapper_ListOfDeepObjectsMapper_ShallowCopy()} },
-                    { "SimpleMapper_ListOfDeepObjectsMapper_ShallowCopy_Parallel", new IMaperTest[] { new SimpleMapper_ListOfDeepObjectsMapper_ShallowCopy() { UseParallel = true } } },
-                    { "SimpleMapper_ListOfDeepObjectsMapper_DeepCopy", new IMaperTest[] { new SimpleMapper_ListOfDeepObjectsMapper_DeepCopy()} },
-                    { "SimpleMapper_ListOfDeepObjectsMapper_DeepCopy_Parallel", new IMaperTest[] { new SimpleMapper_ListOfDeepObjectsMapper_DeepCopy() { UseParallel = true } } },
+                    { "EntityMapper_ListOfDeepObjectsMapper_ShallowCopy", new IMaperTest[] { new EntityMapper_ListOfDeepObjectsMapper_ShallowCopy()} },
+                    { "EntityMapper_ListOfDeepObjectsMapper_ShallowCopy_Parallel", new IMaperTest[] { new EntityMapper_ListOfDeepObjectsMapper_ShallowCopy() { UseParallel = true } } },
+                    { "EntityMapper_ListOfDeepObjectsMapper_DeepCopy", new IMaperTest[] { new EntityMapper_ListOfDeepObjectsMapper_DeepCopy()} },
+                    { "EntityMapper_ListOfDeepObjectsMapper_DeepCopy_Parallel", new IMaperTest[] { new EntityMapper_ListOfDeepObjectsMapper_DeepCopy() { UseParallel = true } } },
                 };
 
         static Dictionary<string, double> mapperTestTimes = new Dictionary<string, double>();
@@ -150,7 +150,7 @@ namespace Benchmark
                 var destProp = destProps.Where(p => p.Name == srcProp.Name && p.GetMethod.IsPublic && p.SetMethod.IsPublic).FirstOrDefault();
                 if (destProp != null)
                 {
-                    //this need to be configurable -> if true -> objDest.ObjProp = objSource.ObjProp; if false -> objDest.ObjProp = SimpleMapper.Mapper.Current.Map<objSource.ObjPropType, objDest.ObjPropType>(source);
+                    //this need to be configurable -> if true -> objDest.ObjProp = objSource.ObjProp; if false -> objDest.ObjProp = EntityMapper.Mapper.Current.Map<objSource.ObjPropType, objDest.ObjPropType>(source);
                     if ((destProp.PropertyType.IsPrimitive == true || destProp.PropertyType.Name == "String"))
                     {
                         result.AppendLine($"{destinationName}.{destProp.Name} = {sourceName}.{srcProp.Name};");

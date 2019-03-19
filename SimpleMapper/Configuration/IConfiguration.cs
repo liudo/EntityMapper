@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleMapper.Configuration
+namespace EntityMapper.Configuration
 {
     interface IConfiguration
     {

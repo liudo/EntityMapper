@@ -1,5 +1,5 @@
-﻿using SimpleMapper.Configuration;
-using SimpleMapper.Templates;
+﻿using EntityMapper.Configuration;
+using EntityMapper.Templates;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleMapper
+namespace EntityMapper
 {
     public class Mapper : IMapper
     {
@@ -123,7 +123,7 @@ namespace SimpleMapper
         //    }
         //}
 
-        //public static void Compile(string assemblyName = "SimpleMapper.Dynamic.Mappers.dll")
+        //public static void Compile(string assemblyName = "EntityMapper.Dynamic.Mappers.dll")
         //{
         //    MapperCompiler.Compile(Configuration._MappingsToCompile, assemblyName);
         //}

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleMapper
+namespace EntityMapper
 {
     public class MappersList
     {

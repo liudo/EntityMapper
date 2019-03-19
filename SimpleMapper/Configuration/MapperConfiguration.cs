@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleMapper.Configuration
+namespace EntityMapper.Configuration
 {
     public class MapperConfiguration
     {
@@ -106,7 +106,7 @@ namespace SimpleMapper.Configuration
             //}
         }
 
-        public void Compile(string assemblyName = "SimpleMapper.Dynamic.Mappers.dll")
+        public void Compile(string assemblyName = "EntityMapper.Dynamic.Mappers.dll")
         {
             MapperCompiler.Compile(_MappingsToCompile, assemblyName);
         }

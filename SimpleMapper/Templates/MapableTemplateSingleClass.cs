@@ -56,7 +56,7 @@
         List<TDestination> destination = new List<TDestination>();
         foreach (var source in sources)
         {
-            destination.Add(SimpleMapper.Mapper.Current.MapDeep<SourceNamespace.SourceName, TDestination>(source) as TDestination);
+            destination.Add(EntityMapper.Mapper.Current.MapDeep<SourceNamespace.SourceName, TDestination>(source) as TDestination);
         }
 
         return destination;
@@ -67,7 +67,7 @@
         ConcurrentBag<TDestination> destination = new ConcurrentBag<TDestination>();
         System.Threading.Tasks.Parallel.ForEach(sources, (source) =>
         {
-            destination.Add(SimpleMapper.Mapper.Current.MapDeep<SourceNamespace.SourceName, TDestination>(source) as TDestination);
+            destination.Add(EntityMapper.Mapper.Current.MapDeep<SourceNamespace.SourceName, TDestination>(source) as TDestination);
         });
 
         return destination.ToList<TDestination>();
