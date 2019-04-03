@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -12,10 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Benchamark.Common\Benchamark.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\SimpleMapper\EntityMapper.csproj" />
+    <ProjectReference Include="..\EntityMapper\EntityMapper.csproj" />
   </ItemGroup>
 
 </Project>
