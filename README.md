@@ -10,6 +10,34 @@ EntityMapper.Mapper.Configure(cfg =>
     cfg.CreateMap<B, B>(reversal: false);
     cfg.CreateMap<A, ADto>(reversal: true);
     cfg.CreateMap<B, BDto>(reversal: true);
+    cfg.Compile();
+});
+```
+
+### How to Ignore Property
+```c#
+EntityMapper.Mapper.Configure(cfg =>
+{
+    cfg.ClearMappings();
+    cfg.CreateMap<B, BDto>(reversal: true).Ignore("PropertyName1", "PropertyName2");
+    cfg.Compile();
+});
+```
+
+### How to do Custom Mappings
+```c#
+EntityMapper.Mapper.Configure(cfg =>
+{
+    cfg.ClearMappings();
+    cfg.CreateMap<C, CDto>(reversal: true).CustomMappings(
+        (source, dest) =>
+        {
+            if(source.Age > 5)
+                dest.NewAge = source.Age;
+        },
+        (source, dest) => { dest.Color = source.Name; }
+    );
+    cfg.Compile();
 });
 ```
 
