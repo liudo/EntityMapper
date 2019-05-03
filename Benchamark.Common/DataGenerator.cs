@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Benchmark.Common;
 
-namespace Benchmark
+namespace Benchmark.Common
 {
     public class DataGenerator
     {

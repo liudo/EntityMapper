@@ -80,6 +80,7 @@ namespace Benchmark.Common
 
     public class CDto : _Base
     {
+        public int NewAge { get; set; }
     }
     public class DDto : _Base
     {

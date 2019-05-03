@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 
 namespace EntityMapper.Configuration
@@ -11,6 +14,9 @@ namespace EntityMapper.Configuration
         public bool DeepCopy { get; set; }
         public bool Reversal { get; set; }
 
+        internal MapInfo<TSource, TDestination> Map { get; private set; }
+        internal MapInfo<TDestination, TSource> MapReversal { get; private set; }
+
         internal MapConfiguration()
         {
         }
@@ -21,29 +27,55 @@ namespace EntityMapper.Configuration
             Reversal = reversal;
         }
         
-        internal Tuple<IMapInfo, IMapInfo> CreateMap()
+        internal MapConfiguration<TSource, TDestination> CreateMap()
         {
             Type sourceType = typeof(TSource);
             Type destType = typeof(TDestination);
-            MapInfo<TSource, TDestination> map = null;
-            MapInfo<TDestination, TSource> mapReversal = null;
+            //MapInfo<TSource, TDestination> map = null;
+            //MapInfo<TDestination, TSource> mapReversal = null;
             if ((sourceType.IsGenericType && sourceType.GetGenericTypeDefinition() == typeof(List<>)) == false &&
                 (destType.IsGenericType && destType.GetGenericTypeDefinition() == typeof(List<>)) == false)
             {
-                map = new MapInfo<TSource, TDestination>();
-                MapperCompiler.GenerateDynamicClass(map);
+                Map = new MapInfo<TSource, TDestination>();
+                //MapperCompiler.GenerateDynamicClass(map);
             }
             if (this.Reversal)
             {
-                mapReversal = new MapInfo<TDestination, TSource>();
-                if ((sourceType.IsGenericType && sourceType.GetGenericTypeDefinition() == typeof(List<>)) == false &&
-                (destType.IsGenericType && destType.GetGenericTypeDefinition() == typeof(List<>)) == false)
-                {
-                    MapperCompiler.GenerateDynamicClass(mapReversal);
-                }
+                Reverse();
             }
 
-            return new Tuple<IMapInfo, IMapInfo>(map, mapReversal);
+            return this;
+            //return new Tuple<IMapInfo, IMapInfo>(Map, mapReversal);
+        }
+
+        public MapConfiguration<TSource, TDestination> Reverse()
+        {
+            Type sourceType = typeof(TSource);
+            Type destType = typeof(TDestination);
+            if ((sourceType.IsGenericType && sourceType.GetGenericTypeDefinition() == typeof(List<>)) == false &&
+                (destType.IsGenericType && destType.GetGenericTypeDefinition() == typeof(List<>)) == false)
+            {
+                MapReversal = new MapInfo<TDestination, TSource>();
+                //MapperCompiler.GenerateDynamicClass(mapReversal);
+            }
+            return this;
+        }
+        public MapConfiguration<TSource, TDestination>  CustomMap(Action<TSource, TDestination> memberOption)
+        {
+            this.Map.AddCustomMapping(memberOption);
+            return this;
+        }
+
+        public MapConfiguration<TSource, TDestination> Ingore(params string[] propertyName)
+        {
+            this.Map.Ignore(propertyName);
+            return this;
+        }
+
+        public MapConfiguration<TSource, TDestination> CustomMappings(params Action<TSource, TDestination>[] memberOptions)
+        {
+            this.Map.AddCustomMappings(memberOptions);
+            return this;
         }
     }
 }

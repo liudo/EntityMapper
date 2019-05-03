@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmark", "Benchmark\Benc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchamark.Common", "Benchamark.Common\Benchamark.Common.csproj", "{60DE87AE-7754-4DE6-BCA5-7B9E5CDA8148}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityMapper.Test", "EntityMapper.Test\EntityMapper.Test.csproj", "{751208C0-6ED7-47E2-88BF-F14A506C6891}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{60DE87AE-7754-4DE6-BCA5-7B9E5CDA8148}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60DE87AE-7754-4DE6-BCA5-7B9E5CDA8148}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60DE87AE-7754-4DE6-BCA5-7B9E5CDA8148}.Release|Any CPU.Build.0 = Release|Any CPU
+		{751208C0-6ED7-47E2-88BF-F14A506C6891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{751208C0-6ED7-47E2-88BF-F14A506C6891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{751208C0-6ED7-47E2-88BF-F14A506C6891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{751208C0-6ED7-47E2-88BF-F14A506C6891}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

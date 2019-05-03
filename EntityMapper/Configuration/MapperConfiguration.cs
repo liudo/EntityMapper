@@ -28,10 +28,59 @@ namespace EntityMapper.Configuration
             _Mappings.Clear();
             _MappingsToCompile.Clear();
         }
+        public MapConfiguration<TSource, TDestination> CreateMap<TSource, TDestination>(bool reversal = false)
+        {
+            MapConfiguration<TSource, TDestination> mapConfiguration = new MapConfiguration<TSource, TDestination>(reversal);
+            var maps = mapConfiguration.CreateMap();
+            if (maps.Map != null)
+            {
+                AddMap<TSource, TDestination>(maps.Map);
+                _MappingsToCompile.Add(maps.Map);
+            }
+            if (maps.MapReversal != null && reversal)
+            {
+                AddMap<TDestination, TSource>(maps.MapReversal);
+                _MappingsToCompile.Add(maps.MapReversal);
+            }
+            return mapConfiguration;
+            //Type sourceType = typeof(TSource);
+            //Type destType = typeof(TDestination);
+
+
+            //MapInfo<TSource, TDestination> map = new MapInfo<TSource, TDestination>();
+            //AddMap<TSource, TDestination>(map);
+            //if ((sourceType.IsGenericType && sourceType.GetGenericTypeDefinition() == typeof(List<>)) == false &&
+            //    (destType.IsGenericType && destType.GetGenericTypeDefinition() == typeof(List<>)) == false)
+            //{
+            //    _MappingsToCompile.Add(map);
+            //    MapperCompiler.GenerateDynamicClass(map);
+            //}
+            //if (reversal)
+            //{
+            //    MapInfo<TDestination, TSource> mapReversal = new MapInfo<TDestination, TSource>();
+            //    AddMap<TDestination, TSource>(mapReversal, reversal);
+
+            //    if ((sourceType.IsGenericType && sourceType.GetGenericTypeDefinition() == typeof(List<>)) == false &&
+            //    (destType.IsGenericType && destType.GetGenericTypeDefinition() == typeof(List<>)) == false)
+            //    {
+            //        _MappingsToCompile.Add(mapReversal);
+            //        MapperCompiler.GenerateDynamicClass(mapReversal);
+            //    }
+            //}
+        }
+        public void Compile(string assemblyName = "EntityMapper.Dynamic.Mappers.dll")
+        {
+            MapperCompiler.Compile(_MappingsToCompile, assemblyName);
+        }
+
 
         internal IMappable GetMap<TSource, TDestination>()
         {
             return _Mappings[GetMapKey<TSource>()][GetMapKey<TDestination>()].Instance;
+        }
+        internal MapInfo<TSource, TDestination> GetMapInfo<TSource, TDestination>()
+        {
+            return _Mappings[GetMapKey<TSource>()][GetMapKey<TDestination>()] as MapInfo<TSource, TDestination>;
         }
 
         internal IMappable GetMapList<TSource, TDestination>()
@@ -64,53 +113,6 @@ namespace EntityMapper.Configuration
                 }
             }
         }
-
-        public void CreateMap<TSource, TDestination>(bool reversal = false)
-        {
-            MapConfiguration<TSource, TDestination> mapConfiguration = new MapConfiguration<TSource, TDestination>(reversal);
-            var maps = mapConfiguration.CreateMap();
-            if (maps.Item1 != null)
-            {
-                AddMap<TSource, TDestination>(maps.Item1);
-                _MappingsToCompile.Add(maps.Item1);
-            }
-            if (maps.Item2 != null && reversal)
-            {
-                AddMap<TDestination, TSource>(maps.Item2);
-                _MappingsToCompile.Add(maps.Item2);
-            }
-
-            //Type sourceType = typeof(TSource);
-            //Type destType = typeof(TDestination);
-
-
-            //MapInfo<TSource, TDestination> map = new MapInfo<TSource, TDestination>();
-            //AddMap<TSource, TDestination>(map);
-            //if ((sourceType.IsGenericType && sourceType.GetGenericTypeDefinition() == typeof(List<>)) == false &&
-            //    (destType.IsGenericType && destType.GetGenericTypeDefinition() == typeof(List<>)) == false)
-            //{
-            //    _MappingsToCompile.Add(map);
-            //    MapperCompiler.GenerateDynamicClass(map);
-            //}
-            //if (reversal)
-            //{
-            //    MapInfo<TDestination, TSource> mapReversal = new MapInfo<TDestination, TSource>();
-            //    AddMap<TDestination, TSource>(mapReversal, reversal);
-
-            //    if ((sourceType.IsGenericType && sourceType.GetGenericTypeDefinition() == typeof(List<>)) == false &&
-            //    (destType.IsGenericType && destType.GetGenericTypeDefinition() == typeof(List<>)) == false)
-            //    {
-            //        _MappingsToCompile.Add(mapReversal);
-            //        MapperCompiler.GenerateDynamicClass(mapReversal);
-            //    }
-            //}
-        }
-
-        public void Compile(string assemblyName = "EntityMapper.Dynamic.Mappers.dll")
-        {
-            MapperCompiler.Compile(_MappingsToCompile, assemblyName);
-        }
-
         internal long GetMapKey<T>()
         {
             return typeof(T).GetHashCode();

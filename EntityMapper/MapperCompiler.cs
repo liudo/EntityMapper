@@ -59,8 +59,8 @@ namespace EntityMapper
             sourceCode = ReplaceTemplateKey(sourceCode, TemplateKeys.SourceNamespace, tSrc.Namespace);
             sourceCode = ReplaceTemplateKey(sourceCode, TemplateKeys.SourceName, tSrc.Name);
             sourceCode = ReplaceTemplateKey(sourceCode, TemplateKeys.TDestination, tDest.Name);
-            sourceCode = ReplaceTemplateMappingProperties(sourceCode, TemplateKeys.DestinationPropertyMapping, tSrc, tDest, "destination", "source", deepCopy);
-            sourceCode = ReplaceTemplateMappingProperties(sourceCode, TemplateKeys.DestinationPropertyMappingDeep, tSrc, tDest, "destination", "source", true);
+            sourceCode = ReplaceTemplateMappingProperties(mappingToGenerateSourceFor, sourceCode, TemplateKeys.DestinationPropertyMapping, tSrc, tDest, "destination", "source", deepCopy);
+            sourceCode = ReplaceTemplateMappingProperties(mappingToGenerateSourceFor, sourceCode, TemplateKeys.DestinationPropertyMappingDeep, tSrc, tDest, "destination", "source", true);
             sourceCode = ReplaceTemplateKey(sourceCode, TemplateKeys.DestinationPropertyMappingList, ReplaceTemplateKey("destination.Add(ConvertToInternal(source, new TDestination()));", TemplateKeys.TDestination, tDest.Name));
             mappingToGenerateSourceFor.SourceCodeTSource  = sourceCode.ToString();
         }
@@ -100,10 +100,10 @@ namespace EntityMapper
             return source.Replace(templateKey, value);
         }
 
-        private static StringBuilder ReplaceTemplateMappingProperties(StringBuilder source, string templateKey, Type src, Type dest, string destinationName = "destination", string sourceName = "this", bool deepCopy = false)
+        private static StringBuilder ReplaceTemplateMappingProperties(IMapInfo mappingToGenerateSourceFor, StringBuilder source, string templateKey, Type src, Type dest, string destinationName = "destination", string sourceName = "this", bool deepCopy = false)
         {
             StringBuilder temp = new StringBuilder();
-            var destProps = dest.GetProperties();
+            var destProps = dest.GetProperties().Where(p => mappingToGenerateSourceFor.PropertiesToIgnore().Where(propertyName => propertyName == p.Name).Any() == false);
             foreach (var srcProp in src.GetProperties().Where(p => p.GetMethod.IsPublic && p.SetMethod.IsPublic))
             {
                 var destProp = destProps.Where(p => p.Name == srcProp.Name && p.GetMethod.IsPublic && p.SetMethod.IsPublic).FirstOrDefault();
@@ -214,6 +214,10 @@ namespace EntityMapper
         }
         internal static void Compile(HashSet<IMapInfo> maps, string assemblyName = "EntityMapper.Dynamic.Mappers.dll")
         {
+            foreach(var map in maps)
+            {
+                MapperCompiler.GenerateDynamicClass(map);
+            }
             LoadNeededAssemblies();
             string sourceCode = GenerateAllDynamicClasses(maps);
             SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);

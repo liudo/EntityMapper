@@ -44,13 +44,19 @@ namespace EntityMapper
         public TDestination Map<TSource, TDestination>(TSource source, TDestination destination) where TDestination : class
         {
             IMappable instance = Configuration.GetMap<TSource, TDestination>();
-            return instance.ConvertTo(source, destination) as TDestination;
+            var mapInfo = Configuration.GetMapInfo<TSource, TDestination>();
+            var result = instance.ConvertTo(source, destination) as TDestination;
+            mapInfo.ExecuteCustomMappings(source, result);
+            return result;
         }
         public TDestination Map<TSource, TDestination>(TSource source) where TDestination : class, new()
         {
-            IMappable instance = Configuration.GetMap<TSource, TDestination>();
-            instance.Source = source;
-            return instance.ConvertTo() as TDestination;
+            //IMappable instance = Configuration.GetMap<TSource, TDestination>();
+            var mapInfo = Configuration.GetMapInfo<TSource, TDestination>();
+            mapInfo.Instance.Source = source;
+            var result = mapInfo.Instance.ConvertTo() as TDestination;
+            mapInfo.ExecuteCustomMappings(source, result);
+            return result;
         }
 
         public TDestination MapDeep<TSource, TDestination>(TSource source) where TDestination : class, new()
